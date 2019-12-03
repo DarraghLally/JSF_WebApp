@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<title>addStore</title>
+</h:head>
+
+<h:body>
+	<h:messages globalOnly="true" />
+	<!-- error display if error occurs -->
+	<h:form>
+		<table style="width: 100%">
+			<tr>
+				<th colspan="2">ADD STORE</th>
+			</tr>
+			<!-- 
+			<tr>
+				<th>Store ID:</th>
+				<td><h:inputText value="#{store.storeID}" required/></td>			
+			</tr>
+			 -->
+			<tr>
+				<th>Store Name:</th>
+				<td><h:inputText value="#{store.storeName}" /></td>
+			</tr>
+			<tr>
+				<th>Store Founded:</th>				
+				<td><h:inputText value="#{store.founded}" /></td>
+			</tr>
+			<tr>
+				<th colspan="2">
+					<h:commandButton value="Add"
+						action="#{storeController.addStore(store)}" />
+					<!-- Home Button -->
+					<h:commandButton value="Home" action="index"></h:commandButton>
+				</th>
+			</tr>
+		</table>   
+		
+	</h:form>
+</h:body>
+</html>
