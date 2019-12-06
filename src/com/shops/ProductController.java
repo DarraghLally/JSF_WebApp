@@ -44,13 +44,13 @@ public class ProductController {
 	
 	
 	//Delete
-	public void delete(int pid) throws Exception {
+	public void deleteProduct(int pid) throws Exception {
 		System.out.println(pid);
-		//dao.delete(pid);
+		dao.deleteProduct(pid);
 	}
 
 	/*
-	//Add Stores
+	//Add Product
 	public String addStore(Store s) {
 		// System.out.println(p.prodid + " " + p.descrip);
 		try {

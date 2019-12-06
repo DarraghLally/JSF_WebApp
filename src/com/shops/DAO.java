@@ -107,17 +107,46 @@ public class DAO {
 		return products;
 	}
 
-	// Add Delete Store
+	// Add Delete Product
 	public void deleteProduct(int pid) throws Exception {
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
 		// ResultSet myRs = null;
 
 		myConn = mysqlDS.getConnection();
-		String sql = "delete from product where id = ?";
+		String sql = "delete from product where pid = ?";
 		myStmt = myConn.prepareStatement(sql);
 		myStmt.setInt(1, pid);
-		myStmt.execute();
+		myStmt.execute();		
+	}
+	
+	// Load products
+	public ArrayList<Product> loadStoreProducts(int sid) throws Exception {
+		System.out.println("In DAO loadStoreProducts()");
+
+		Connection myConn = null;
+		Statement myStmt = null;
+		ResultSet myRs = null;
+
+		myConn = mysqlDS.getConnection();
+		String sql = "select * from product where sid = ?";
+		myStmt = myConn.createStatement();
+		((PreparedStatement) myStmt).setInt(1, sid);
+		myRs = myStmt.executeQuery(sql);
+		
+		// Create Storage
+		ArrayList<Product> products = new ArrayList<Product>();
+		// process result set
+		while (myRs.next()) {
+			// System.out.println(myRs.getString("PRODID"));
+			Product p = new Product();
+			p.setPid(myRs.getInt("pid"));
+			p.setSid(myRs.getInt("sid"));
+			p.setProductName(myRs.getString("prodName"));
+			p.setPrice(myRs.getDouble("price"));
+			products.add(p);
+		}
+		return products;
 	}
 
 }
