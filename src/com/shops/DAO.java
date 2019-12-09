@@ -22,11 +22,10 @@ public class DAO {
 	}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+	
 	// Load Stores
 	public ArrayList<Store> loadStores() throws Exception {
-
-		System.out.println("In DAO loadStores()");
-
+		//System.out.println("In DAO loadStores()");
 		Connection myConn = null;
 		Statement myStmt = null;
 		ResultSet myRs = null;
@@ -47,6 +46,9 @@ public class DAO {
 			s.setFounded(myRs.getString("founded"));
 			stores.add(s);
 		}
+		myConn.close();
+		myStmt.close();
+		myRs.close();
 		return stores;
 	}// loadStore()
 
@@ -54,7 +56,6 @@ public class DAO {
 	public void addStore(Store store) throws Exception {
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
-		// ResultSet myRs = null;
 
 		myConn = mysqlDS.getConnection();
 		String sql = "insert into store values (?, ?, ?)";
@@ -63,19 +64,24 @@ public class DAO {
 		myStmt.setString(2, store.getStoreName());
 		myStmt.setString(3, store.getFounded());
 		myStmt.execute();
+		
+		myConn.close();
+		myStmt.close();
 	}// addStore()
 
 	// Add Delete Store
 	public void delete(int storeID) throws Exception {
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
-		// ResultSet myRs = null;
 
 		myConn = mysqlDS.getConnection();
 		String sql = "delete from store where id = ?";
 		myStmt = myConn.prepareStatement(sql);
 		myStmt.setInt(1, storeID);
 		myStmt.execute();
+		
+		myConn.close();
+		myStmt.close();
 	}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -104,6 +110,9 @@ public class DAO {
 			p.setPrice(myRs.getDouble("price"));
 			products.add(p);
 		}
+		myConn.close();
+		myStmt.close();
+		myRs.close();
 		return products;
 	}
 
@@ -111,7 +120,6 @@ public class DAO {
 	public void deleteProduct(int pid) throws Exception {
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
-		// ResultSet myRs = null;
 
 		myConn = mysqlDS.getConnection();
 		String sql = "delete from product where pid = ?";
@@ -128,8 +136,11 @@ public class DAO {
 		ResultSet myRs = null;
 
 		myConn = mysqlDS.getConnection();
-		String sql = "select s.id, s.name, s.founded, p.pid, p.prodName, p.price from store s inner join product p on s.id = p.sid where s.id = " + sid; 
-		
+		String sql = "select s.id, s.name, s.founded, p.pid, p.prodName, p.price "
+				+ "from store s "
+				+ "inner join product p "
+				+ "on s.id = p.sid "
+				+ "where s.id = " + sid; 		
 		myStmt = myConn.createStatement();
 		myRs = myStmt.executeQuery(sql);
 		
@@ -146,8 +157,11 @@ public class DAO {
 			sp.setProduct(myRs.getString("prodName"));
 			sp.setPrice(myRs.getDouble("price"));
 			storeProducts.add(sp);
-		}
-		return storeProducts;
-		
+		}		
+		myConn.close();
+		myStmt.close();
+		myRs.close();
+		return storeProducts;		
 	}
+	
 }

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<!-- for placeholder in date input -->
+
+<h:head>
+	<title>addOffice</title>
+</h:head>
+
+<h:body>
+	<h:messages globalOnly="true" />
+	<!-- error display if error occurs -->
+	<h:form>
+		<table style="width: 100%">
+			<tr>
+				<th colspan="2">ADD OFFICE</th>
+			</tr>
+			<tr>
+				<th>Office ID:</th>
+				<!-- <td><h:inputText value="#{office.officeID}" required /></td>  -->
+			</tr>
+			<tr>
+				<th>Office Location:</th>
+				<!-- <td><h:inputText value="#{office.officeLocation}" /></td>  -->
+			</tr>
+			<tr>
+				<th colspan="2">
+					<!-- Home Button --> 
+					<h:commandButton value="Home" action="index"></h:commandButton>
+					<!-- Store Button --> 
+					<h:commandButton value="Stores" action="list_stores"></h:commandButton>
+				</th>
+			</tr>
+		</table>
+
+	</h:form>
+</h:body>
+</html>
