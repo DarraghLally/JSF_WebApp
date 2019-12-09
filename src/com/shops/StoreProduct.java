@@ -5,8 +5,7 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean
 public class StoreProduct {
 	
-	//Variables
-	
+	//Variables	
 	private int sid;
 	private String storeName;
 	private int pid;	
@@ -39,17 +38,17 @@ public class StoreProduct {
 	public void setProduct(String product) {
 		this.product = product;
 	}
-	public double getPrice() {
-		return price;
-	}
-	public void setPrice(double price) {
-		this.price = price;
-	}
 	public String getFounded() {
 		return founded;
 	}
 	public void setFounded(String founded) {
 		this.founded = founded;
+	}
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
 	}
 	
 	

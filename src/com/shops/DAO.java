@@ -144,7 +144,7 @@ public class DAO {
 			sp.setFounded(myRs.getString("founded"));
 			sp.setPid(myRs.getInt("pid"));
 			sp.setProduct(myRs.getString("prodName"));
-			sp.setPrice(myRs.getFloat("price"));
+			sp.setPrice(myRs.getDouble("price"));
 			storeProducts.add(sp);
 		}
 		return storeProducts;
