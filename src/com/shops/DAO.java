@@ -3,6 +3,7 @@ package com.shops;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -73,7 +74,7 @@ public class DAO {
 	public void delete(int storeID) throws Exception {
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
-
+		
 		myConn = mysqlDS.getConnection();
 		String sql = "delete from store where id = ?";
 		myStmt = myConn.prepareStatement(sql);
@@ -116,7 +117,7 @@ public class DAO {
 		return products;
 	}
 
-	// Add Delete Product
+	//Delete Product
 	public void deleteProduct(int pid) throws Exception {
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
@@ -125,7 +126,10 @@ public class DAO {
 		String sql = "delete from product where pid = ?";
 		myStmt = myConn.prepareStatement(sql);
 		myStmt.setInt(1, pid);
-		myStmt.execute();		
+		myStmt.execute();
+		
+		myConn.close();
+		myStmt.close();
 	}
 	
 	// Load products for specific store
@@ -163,5 +167,29 @@ public class DAO {
 		myRs.close();
 		return storeProducts;		
 	}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	//Check for adding new Head Office
+	public int checkMySQL(int id) throws SQLException {
+		int result = 0;
+		
+		Connection myConn = null;
+		Statement myStmt = null;
+		ResultSet myRs = null;
+
+		myConn = mysqlDS.getConnection();
+		String sql = "select * from store where id = " + id + ""; 		
+		myStmt = myConn.createStatement();
+		myRs = myStmt.executeQuery(sql);
+		
+		//Code from stackedoverflow
+		if(myRs != null) {		
+			myRs.last();
+			result = myRs.getRow();
+		}
+		myConn.close();
+		myStmt.close();
+		myRs.close();
+		return result;		
+	}	
 }

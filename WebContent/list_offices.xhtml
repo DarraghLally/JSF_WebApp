@@ -8,10 +8,10 @@
 	<title>list-offices</title>
 </h:head>
 
-<f:metadata>
+<!--<f:metadata>
 	<f:event type="preRenderView"
 		listener="#{headOfficeController.loadOffices()}" />
-</f:metadata>
+</f:metadata>   -->
 
 <h:outputStylesheet library="css" name="tables.css"/>
 
@@ -22,11 +22,17 @@
 		rowClasses='table-odd-row, table-even-row'>
 		<h:column>
 			<f:facet name="header">Office ID</f:facet>
- 	  			 #{o.sid}
+ 	  			 #{o.oid}
 		</h:column>
 		<h:column>
 			<f:facet name="header">Office Location</f:facet>
 				#{o.loc}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Delete</f:facet>
+				<h:form>
+					<h:commandLink value="Delete" action="#{headOfficeController.delete(o.oid)}"/>
+				</h:form>
 		</h:column>
 	</h:dataTable>
 	

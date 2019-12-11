@@ -19,18 +19,19 @@
 			</tr>
 			<tr>
 				<th>Office ID:</th>
-				<!-- <td><h:inputText value="#{office.officeID}" required /></td>  -->
+				<td><h:inputText value="#{headOffice.oid}"/></td>
 			</tr>
 			<tr>
 				<th>Office Location:</th>
-				<!-- <td><h:inputText value="#{office.officeLocation}" /></td>  -->
+				<td><h:inputText value="#{headOffice.loc}" /></td>
 			</tr>
 			<tr>
 				<th colspan="2">
 					<!-- Home Button --> 
-					<h:commandButton value="Home" action="index"></h:commandButton>
+					<h:commandButton value="Add"
+						action="#{headOfficeController.addHeadOffice(headOffice)}" />
 					<!-- Store Button --> 
-					<h:commandButton value="Stores" action="list_stores"></h:commandButton>
+					<h:commandButton value="Offices" action="list_offices"></h:commandButton>
 				</th>
 			</tr>
 		</table>

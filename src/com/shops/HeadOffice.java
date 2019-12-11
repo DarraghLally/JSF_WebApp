@@ -6,22 +6,20 @@ import javax.faces.bean.ManagedBean;
 public class HeadOffice {
 	
 	//Variables
-	private int sid;
+	private int oid;
 	private String loc;
-	
+
 	//Assessor Methods
-	public int getSid() {
-		return sid;
-	}
-	public void setSid(int sid) {
-		this.sid = sid;
-	}
 	public String getLoc() {
 		return loc;
 	}
 	public void setLoc(String loc) {
 		this.loc = loc;
 	}
-	
-	
+	public int getOid() {
+		return oid;
+	}
+	public void setOid(int oid) {
+		this.oid = oid;
+	}
 }

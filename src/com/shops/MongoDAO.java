@@ -30,21 +30,26 @@ public class MongoDAO {
 	
 		for (Document d : headOffices) {
 			HeadOffice o = new HeadOffice();			
-			o.setSid((int)(d.get("_id")));
+			o.setOid((int)(d.get("_id")));
 			o.setLoc((String)(d.get("location")));
 			headOfficeList.add(o);
-		}
-		
+		}		
 		return headOfficeList;
 	}
 	
 	// Adds a new head office
 	public void addHeadOffice(HeadOffice o) throws Exception {
-		
 		Document d = new Document();
-		d.append("_id", o.getSid());	
+		d.append("_id", o.getOid());	
 		d.append("location", o.getLoc());
-
 		collection.insertOne(d);	
 	}
+	
+	//Delete Office
+	/*public void deleteHeadOffice(HeadOffice o) throws Exception {
+		Document d = new Document();
+		int deleteID = o.getOid();
+		d = collection.find({_id : deleteID});
+		collection.deleteOne(d);	
+	}*/
 }

@@ -8,6 +8,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+
 //Interface between view and DAO
 @ManagedBean
 @SessionScoped
@@ -28,14 +30,21 @@ public class StoreController {
 
 	//Delete
 	public void delete(int storeID) throws Exception {
-		//System.out.println(id);
-		dao.delete(storeID);
+		try {
+			dao.delete(storeID);
+		} 
+		catch(MySQLIntegrityConstraintViolationException e) {
+			FacesMessage message = new FacesMessage("Error: Store " + storeID + " has products");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
-
 	//Load Stores from DAO
 	public String loadStores() {
-		// System.out.println("In LoadProducts()");
 		try {
 			stores = dao.loadStores();
 		} catch (Exception e) {
@@ -49,19 +58,18 @@ public class StoreController {
 		return stores;
 	}
 
-	//Add Stores
+	//Add Store
 	public String addStore(Store s) {
-		// System.out.println(p.prodid + " " + p.descrip);
 		try {
 			dao.addStore(s);
-			return "index"; // if everything ok go to index.xhtml
+			return "list_stores"; // if everything ok go to manage stores
 		} catch (SQLIntegrityConstraintViolationException e) {
-			FacesMessage message = new FacesMessage("Error: Store ID already exists");
+			FacesMessage message = new FacesMessage("Error: Store " + s.getStoreName() + " already exists");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return null; // id there is an error stay where you are
+			return null; // if there is an error stay where you are
 		}
 	}
 	
